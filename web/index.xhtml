@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton value="Recargar">
+                <f:ajax render="@page" listener="#{webIntegratorMBean.updateLists}" />
+            </h:commandButton>
+        </h:form>
+        <table>
+            <tr>
+                <td style="vertical-align: top;">
+                    <h:form id="form1">
+                        <h2>Objetos</h2>
+                        <h:panelGrid columns="2">
+                            <h:inputText value="#{functionsManagerMBean.nombreObjeto}" id="txt_nombre" pt:placeholder="Nombre objeto"/>
+                            <h:commandButton value="Guardar">
+                                <f:ajax listener="#{functionsManagerMBean.agregarObjeto}" render="@form"/>
+                            </h:commandButton>
+                        </h:panelGrid>
+                        <h:dataTable value="#{webIntegratorMBean.listObjects()}" var="obj">
+                            <h:column>
+                                <f:facet name="header">
+                                    Nombre
+                                </f:facet>
+                                #{obj.name}
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </td>
+                <td style="vertical-align: top;">
+                    <h:form id="form2">
+                        <h2>Operaciones</h2>
+                        <h:panelGrid columns="2">
+                            <h:inputText value="#{functionsManagerMBean.nombreOperacion}" id="txt_nombre" pt:placeholder="Nombre operación"/>
+                            <h:commandButton value="Guardar">
+                                <f:ajax listener="#{functionsManagerMBean.agregarOperacion}" render="@form"/>
+                            </h:commandButton>
+                        </h:panelGrid>
+                        <h:dataTable value="#{webIntegratorMBean.listOperations()}" var="op">
+                            <h:column>
+                                <f:facet name="header">
+                                    Nombre
+                                </f:facet>
+                                #{op.name}
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </td>
+                <td style="vertical-align: top;">
+                    <h:dataTable value="#{webIntegratorMBean.listCalls}" var="call">
+                        
+                    </h:dataTable>
+                </td>
+            </tr>
+        </table>
+    </h:body>
+</html>
+
